@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PokéSwag - Pokémon Go parody swag</title>
+    <meta name="description" content="Pokémon Go parody swag, t-shirts, and more." />
+    <style>
+
+:root {
+  --main-bg-color: #fff8f0;
+  --main-text-color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-bg-color: #333;
+    --main-text-color: white;
+  }
+}
+
+body {
+  margin: 16px;
+  padding: 0;
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+  font-family: Roboto, sans-serif;
+}
+
+.content {
+  max-width: 1100px;
+  margin: auto;
+}
+
+a:visited {
+  color: inherit;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+header div {
+  display: inline-block;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+header img {
+  height: 64px;
+}
+
+header .title {
+  font-size: 32px;
+}
+
+header .slogan {
+  font-size: 16px;
+}
+
+header .cart {
+  font-size: 40px;
+}
+
+a.emoji, .emoji a {
+  text-decoration: none;
+}
+
+.emoji {
+  /* Make the emoji a solid color.
+     Unfortunately, we have to hard-code a color. */
+  color: transparent;
+  text-shadow: 0 0 0 var(--main-text-color);
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+main {
+  border-top: 1px solid var(--main-text-color);
+  border-bottom: 1px solid var(--main-text-color);
+  padding: 16px 0;
+  margin: 16px 0;
+}
+
+.instructions {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.items {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 32px;
+  padding: 0;
+  gap: 16px;
+  flex-direction: row;
+}
+
+.item {
+  width: 256px;
+}
+
+.item a {
+  text-decoration: none;
+}
+
+.item .art {
+  width: 256px;
+  height: 256px;
+  border: 1px solid var(--main-text-color);
+  display: block;
+}
+
+.item .name {
+  font-size: 120%;
+  margin: 8px 0;
+  display: inline-block;
+  text-decoration: underline;
+}
+
+.item .description {
+}
+
+.sizing {
+  margin: 16px 0;
+}
+
+.sizing table {
+  min-width: 360px;
+  font-size: 16px;
+  word-break: break-word;
+  text-align: left;
+}
+
+.sizing td {
+  padding: 10px;
+  border-top: 1px solid var(--main-text-color);
+}
+
+.sizing th {
+  padding: 10px;
+  font-weight: bold;
+}
+
+#detail-overlay {
+  width: 100%;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 50%);
+  display: none;
+}
+
+.detail {
+  max-width: 90%;
+  display: none;
+  background-color: var(--main-bg-color);
+  margin: auto;
+  margin-bottom: 64px;
+}
+
+.detail-button {
+  margin-left: 16px;
+}
+
+#close {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  background-color: var(--main-bg-color);
+  border: 4px solid var(--main-text-color);
+  padding: 5px;
+  border-radius: 50%;
+}
+
+#trainer-agreement-detail {
+  padding: 0 16px;
+}
+    </style>
+    <script>
+(function() {
+  let detailClickOutListenerAdded = false;
+
+  function showImageDetail(id) {
+    const overlay = document.getElementById('detail-overlay');
+    const image = document.getElementById(id);
+
+    overlay.style.display = 'block';
+    image.style.display = 'block';
+
+    // So back can be used to dismiss the pop-up without navigating away.
+    history.pushState({}, '');
+
+    if (!detailClickOutListenerAdded) {
+      detailClickOutListenerAdded = true;
+      overlay.addEventListener('click', () => history.back());
+    }
+
+    return false;
+  }
+
+  function hideImageDetail() {
+    const overlay = document.getElementById('detail-overlay');
+    overlay.style.display = '';
+
+    for (const image of overlay.querySelectorAll('img')) {
+      image.style.display = '';
+    }
+
+    return false;
+  }
+
+  function imageDetailShown() {
+    const overlay = document.getElementById('detail-overlay');
+    if (!overlay) return false;
+    return !!overlay.style.display;
+  }
+
+  window.addEventListener('keydown', e => {
+    if (e.key == 'Escape') {
+      if (imageDetailShown()) {
+        history.back();
+      }
+      return false;
+    }
+  });
+
+  window.addEventListener('popstate', e => {
+    hideImageDetail();
+  });
+
+  window.showImageDetail = showImageDetail;
+  window.hideImageDetail = hideImageDetail;
+})();
+    </script>
+  </head>
+  <body>
+    <div class="content">
+
+      <header>
+        <div class="logo">
+          <img
+            src="pokeswag.png"
+            alt="A manic Eevee with gigantic eyes and a creepy grin.">
+        </div>
+        <div class="title">
+          PokéSwag
+        </div>
+        <div class="spacer">
+        </div>
+        <div class="slogan">
+          You know you need unique new swag.
+        </div>
+        <div class="cart">
+          <a class="emoji" href="https://pokeswag.printify.me/cart">🛒</a>
+        </div>
+      </header>
+
+      <main>
+        <div id="detail-overlay">
+          <img class="detail" id="choice-is-an-illusion-detail" src="choice-is-an-illusion-zoom.png">
+          <img class="detail" id="divalution-detail" src="divalution-zoom.png">
+          <picture>
+            <source srcset="trainer-agreement-zoom-dark-mode.png" media="(prefers-color-scheme: dark)" />
+            <source srcset="trainer-agreement-zoom.png" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" />
+            <img class="detail" id="trainer-agreement-detail" src="trainer-agreement-zoom.png" />
+          </picture>
+          <a id="close" href="#" class="emoji" alt="close" onclick="history.back(); return false;">❌</a>
+        </div>
+
+        <div class="instructions">
+          Click an image or title to view t-shirt options on Printify.
+          Various sizes and colors available.
+        </div>
+
+        <div class="items">
+
+          <div class="item">
+            <a target="_blank" href="https://pokeswag.printify.me/product/1019849/choice-is-an-illusion">
+              <img class="art" src="choice-is-an-illusion.png">
+              <div class="name">"Choice Is An Illusion"</div>
+            </a>
+            <a class="emoji detail-button" href="#"
+               onclick="return showImageDetail('choice-is-an-illusion-detail');">🔎</a>
+            <div class="description">
+              A classic line from your favorite Calvinist Pokémon.
+            </div>
+          </div>
+
+          <div class="item">
+            <a target="_blank" href="https://pokeswag.printify.me/product/1019283/divalution">
+              <img class="art" src="divalution.png">
+              <div class="name">"Divalution"</div>
+            </a>
+            <a class="emoji detail-button" href="#"
+               onclick="return showImageDetail('divalution-detail');">🔎</a>
+            <div class="description">
+              The whole Eevee family: Eevee, Vaporeon, Jolteon, Flareon, Espeon,
+              Umbreon, Leafeon, Glaceon, Sylveon, and Celinedion!
+            </div>
+          </div>
+
+          <div class="item">
+            <a target="_blank" href="https://pokeswag.printify.me/product/1019803/trainer-agreement">
+              <picture>
+                <source srcset="trainer-agreement-dark-mode.png" media="(prefers-color-scheme: dark)" />
+                <source srcset="trainer-agreement.png" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" />
+                <img class="art" src="trainer-agreement.png" />
+              </picture>
+              <div class="name">"Trainer Agreement"</div>
+            </a>
+            <a class="emoji detail-button" href="#"
+               onclick="return showImageDetail('trainer-agreement-detail');">🔎</a>
+            <div class="description">
+              Not actually legally binding, though it may feel like it.
+              A full 12"x18" page of text appears on the actual shirt.
+            </div>
+          </div>
+
+        </div>
+
+        <details class="sizing">
+          <summary>Sizing Chart (U.S.)</summary>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>S</th>
+                <th>M</th>
+                <th>L</th>
+                <th>XL</th>
+                <th>2XL</th>
+                <th>3XL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Width</td>
+                <td>18"</td>
+                <td>20"</td>
+                <td>22"</td>
+                <td>24"</td>
+                <td>26"</td>
+                <td>28"</td>
+              </tr>
+              <tr>
+                <td>Length</td>
+                <td>28"</td>
+                <td>29"</td>
+                <td>30"</td>
+                <td>31"</td>
+                <td>32"</td>
+                <td>33"</td>
+              </tr>
+              <tr>
+                <td>Sleeve length</td>
+                <td>8.25"</td>
+                <td>8.5"</td>
+                <td>8.75"</td>
+                <td>9.0"</td>
+                <td>9.25"</td>
+                <td>9.5"</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
+
+        <details class="sizing">
+          <summary>Sizing Chart (Metric)</summary>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>S</th>
+                <th>M</th>
+                <th>L</th>
+                <th>XL</th>
+                <th>2XL</th>
+                <th>3XL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Width</td>
+                <td>45.7 cm</td>
+                <td>50.8 cm</td>
+                <td>55.8 cm</td>
+                <td>60.9 cm</td>
+                <td>66.0 cm</td>
+                <td>71.1 cm</td>
+              </tr>
+              <tr>
+                <td>Length</td>
+                <td>71.1 cm</td>
+                <td>73.6 cm</td>
+                <td>76.2 cm</td>
+                <td>78.7 cm</td>
+                <td>81.2 cm</td>
+                <td>83.8 cm</td>
+              </tr>
+              <tr>
+                <td>Sleeve length</td>
+                <td>20.9 cm</td>
+                <td>21.6 cm</td>
+                <td>22.2 cm</td>
+                <td>22.9 cm</td>
+                <td>23.5 cm</td>
+                <td>24.1 cm</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
+      </main>
+
+      <footer>
+        <p>Artwork, rework, collages, and original text by <a href="https://joeyparrish.github.io/">Joey Parrish</a>.</p>
+        <p>I earn ~$1 profit per shirt after taxes and I front the production costs.  This is a labor of love, and I hope you enjoy it.</p>
+        <p>My Pokémon Go Trainer Code: 6171 9255 3006 (<a href="https://joeyparrish.github.io/joeyparrish/logos/trainer-code.png">QR</a>)</p>
+      </footer>
+
+    </div>
+  </body>
+</html>
