@@ -231,6 +231,8 @@ footer {
       overlay.addEventListener('click', () => history.back());
     }
 
+    window.scrollTo(0, 0);
+
     return false;
   }
 
@@ -241,8 +243,6 @@ footer {
     for (const image of overlay.querySelectorAll('img')) {
       image.style.display = '';
     }
-
-    return false;
   }
 
   function imageDetailShown() {
@@ -299,7 +299,8 @@ footer {
             <source srcset="trainer-agreement-zoom.png" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" />
             <img class="detail" id="trainer-agreement-detail" src="trainer-agreement-zoom.png" />
           </picture>
-          <a id="close" href="#" class="emoji" alt="close" onclick="history.back(); return false;">❌</a>
+          <!-- NOTE: closes via the general click handler for the overlay -->
+          <a id="close" href="#" class="emoji" alt="close">❌</a>
         </div>
 
         <div class="instructions">
