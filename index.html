@@ -307,6 +307,11 @@ footer {
             <source srcset="trainer-agreement-zoom.png" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" />
             <img class="detail" id="trainer-agreement-detail" src="trainer-agreement-zoom.png" />
           </picture>
+          <picture>
+            <source srcset="basic-zoom-dark-mode.png" media="(prefers-color-scheme: dark)" />
+            <source srcset="basic-zoom.png" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" />
+            <img class="detail" id="basic-detail" src="basic-zoom.png" />
+          </picture>
           <!-- NOTE: closes via the general click handler for the overlay -->
           <a id="close" href="#" class="emoji" alt="close">❌</a>
         </div>
@@ -340,6 +345,22 @@ footer {
             <div class="description">
               The whole Eevee family: Eevee, Vaporeon, Jolteon, Flareon, Espeon,
               Umbreon, Leafeon, Glaceon, Sylveon, and Celinedion!
+            </div>
+          </div>
+
+          <div class="item">
+            <a target="_blank" href="https://pokeswag.printify.me/product/11900332">
+              <picture>
+                <source srcset="basic-dark-mode.png" media="(prefers-color-scheme: dark)" />
+                <source srcset="basic.png" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" />
+                <img class="art" src="basic.png" />
+              </picture>
+              <div class="name">"Basic"</div>
+            </a>
+            <a class="detail-button" href="#"
+               onclick="return showImageDetail('basic-detail');">🔎</a>
+            <div class="description">
+              You know it, I know it, even he knows it.
             </div>
           </div>
 
